@@ -1,5 +1,5 @@
 const express = require('express');
-const passportConfig = require("./passport-config");
+const passportConfig = require("./config/passport-config");
 const router = express.Router();
 const validation = require("./routes/validation");
 // Create the server
