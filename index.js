@@ -36,3 +36,4 @@ app.listen(PORT, () => {
 })
 
 // Upload new version
+console.log('yes')
