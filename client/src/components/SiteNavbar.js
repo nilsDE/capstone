@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 
 export class SiteNavbar extends Component {
@@ -8,8 +8,8 @@ export class SiteNavbar extends Component {
         <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
           <Navbar.Brand href="/">MyWisdom</Navbar.Brand>
             <Nav className="ml-auto">
-              <Nav.Link href="/signin">LogIn</Nav.Link>
-              <Nav.Link href="/signup">SignUp</Nav.Link>
+                  <Nav.Link href="/signin">LogIn</Nav.Link>
+                  <Nav.Link href="/signup">SignUp</Nav.Link>
             </Nav>
         </Navbar>
       </Fragment>
@@ -17,4 +17,4 @@ export class SiteNavbar extends Component {
   }
 }
 
-export default SiteNavbar
+export default SiteNavbar;

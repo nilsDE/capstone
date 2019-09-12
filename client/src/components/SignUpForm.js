@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Button } from 'react-bootstrap';
 
-
 export default class SignUpForm extends Component {
 
   constructor(props) {

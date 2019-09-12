@@ -4,20 +4,16 @@ const passportConfig = require("./config/passport-config");
 const session = require("express-session");
 const flash = require("express-flash");
 const cors = require('cors');
-const routes = require('./routes/routes');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-// Create the server
-const app = express();
+const userController = require('./controllers/userController');
 const path = require('path');
+const helper = require('./auth/helpers');
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-})
+const app = express();
+
 app.use(morgan('dev'));
 app.use(cors());
-app.use(routes);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -34,6 +30,19 @@ passportConfig.init(app);
 app.use((req,res,next) => {
   res.locals.currentUser = req.user;
   next();
+})
+
+// routes
+app.post("/users", userController.create);
+
+app.get("/users/verify", (req, res) => {
+  const loggedIn = req.user ? true : false;
+  res.json({ msg: loggedIn });
+});
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
 })
 
 const PORT = process.env.PORT || 5000

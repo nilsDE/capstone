@@ -12,11 +12,12 @@ module.exports = {
     userQueries.createUser(newUser, (err, user) => {
       if (err) {
         req.flash("error", err);
-        res.redirect("/users/sign_up");
+        res.redirect("/users/signup");
       } else {
         passport.authenticate("local")(req, res, () => {
-          req.flash("notice", "You've successfully signed in!");
           res.redirect("/");
+          console.log(req.user)
+          // req.flash("notice", "You've successfully signed up for the app! Log in right now:");
         })
       }
     });

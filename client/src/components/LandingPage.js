@@ -4,6 +4,7 @@ import { Button, Nav } from 'react-bootstrap';
 import './styles.css';
 
 export class LandingPage extends Component {
+
   render() {
     return (
       <Fragment>
@@ -26,4 +27,4 @@ export class LandingPage extends Component {
   }
 }
 
-export default LandingPage
+export default LandingPage;
