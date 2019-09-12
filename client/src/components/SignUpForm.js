@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 
 
@@ -16,7 +15,7 @@ export default class SignUpForm extends Component {
   render() {
     return (
       <Fragment>
-        <Form className="mt-5" onSubmit={(e) => this.handleSubmit(e)}>
+        <Form className="mt-5" action="/users" method="post">
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control name="email" type="email" placeholder="Enter email" onChange={e => this.handleChange(e) } />
@@ -38,18 +37,5 @@ export default class SignUpForm extends Component {
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const data = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    axios.post('/users', data)
-    .then(res =>
-      console.log(res)
-    ).catch(err =>
-      console.log(err))
   }
 }

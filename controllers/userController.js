@@ -3,7 +3,8 @@ const passport = require("passport");
 
 module.exports = {
   create(req, res, next) {
-    console.log('in create')
+    console.log('in create');
+    console.log(req.body)
     let newUser = {
       email: req.body.email,
       password: req.body.password

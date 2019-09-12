@@ -1,12 +1,12 @@
 const express = require('express');
 require('dotenv').config();
 const passportConfig = require("./config/passport-config");
-const router = express.Router();
 const session = require("express-session");
 const flash = require("express-flash");
-const validation = require("./routes/validation");
 const cors = require('cors');
-const userController = require("./controllers/userController");
+const routes = require('./routes/routes');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
 // Create the server
 const app = express();
 const path = require('path');
@@ -15,14 +15,13 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 })
-
+app.use(morgan('dev'));
 app.use(cors());
-
-// routes
-// router.post("/users", validation.validateUsers, userController.create);
-router.post("/users", userController.create);
-router.post("/users/sign_in", validation.validateUsers, userController.signIn);
-
+app.use(routes);
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(session({
   secret: process.env.cookieSecret,
   resave: false,
