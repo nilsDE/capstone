@@ -3,10 +3,10 @@ const passport = require("passport");
 
 module.exports = {
   create(req, res, next) {
+    console.log('in create')
     let newUser = {
       email: req.body.email,
-      password: req.body.password,
-      passwordConfirmation: req.body.passwordConfirmation
+      password: req.body.password
     };
     userQueries.createUser(newUser, (err, user) => {
       if (err) {

@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import React, { Component, Fragment } from 'react'
+import { Navbar, Nav } from 'react-bootstrap';
 
 export class SiteNavbar extends Component {
   render() {
     return (
-      <Container>
+      <Fragment>
         <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
-          <Navbar.Brand href="#home">MyWisdom</Navbar.Brand>
+          <Navbar.Brand href="/">MyWisdom</Navbar.Brand>
             <Nav className="ml-auto">
-              <Nav.Link href="/signup">LogIn</Nav.Link>
-              <Nav.Link href="#link">SignUp</Nav.Link>
+              <Nav.Link href="/signin">LogIn</Nav.Link>
+              <Nav.Link href="/signup">SignUp</Nav.Link>
             </Nav>
         </Navbar>
-      </Container>
+      </Fragment>
     )
   }
 }
