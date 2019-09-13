@@ -2,8 +2,7 @@ const statementQueries = require("../db/queries.statements.js");
 
 module.exports = {
   index(req, res, next) {
-    statementQueries.getAllStatements((err, statements) => {
-      console.log('statements:', statements)
+    statementQueries.getAllStatements(req.user.dataValues.id, (err, statements) => {
       if (err) {
         res.send(err)
       } else {

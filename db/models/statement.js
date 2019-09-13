@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Statement.associate = function(models) {
     Statement.belongsTo(models.User, {
-      foreignId: "userId",
+      foreignKey: "userId",
       onDelete: "CASCADE"
     })
   };

@@ -1,9 +1,9 @@
 const Statement = require("./models").Statement;
 
 module.exports = {
-  getAllStatements(callback) {
+  getAllStatements(user, callback) {
     console.log('get all statements')
-    return Statement.findAll()
+    return Statement.findAll({ where: { userId: user } })
       .then((statements) => {
         callback(null, statements);
       })

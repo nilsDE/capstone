@@ -14,7 +14,7 @@ export default class ListStatements extends Component {
   }
 
   componentDidMount() {
-    axios.get('/statements').then(res => console.log('axios'))
+    axios.get('/statements').then(res => console.log('axios', res))
   }
 
   render() {
