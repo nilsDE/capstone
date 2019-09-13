@@ -34,6 +34,8 @@ app.use((req,res,next) => {
 
 // routes
 app.post("/users", userController.create);
+app.post("/users/signin", userController.signIn);
+app.post("/users/signout", userController.signOut);
 
 app.get("/users/verify", (req, res) => {
   const loggedIn = req.user ? true : false;

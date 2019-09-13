@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 
-export default class SignUpForm extends Component {
+export default class LoginForm extends Component {
 
   constructor(props) {
     super(props);
@@ -23,7 +23,7 @@ export default class SignUpForm extends Component {
     return (
       <Fragment>
         <Form className="mt-5" onSubmit={(e) => this.handleSubmit(e)}>
-          <h2>SignUp</h2>
+          <h2>Login</h2>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control name="email" type="email" placeholder="Enter email" onChange={e => this.handleChange(e) } />
@@ -45,7 +45,7 @@ export default class SignUpForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/users', {
+    axios.post('/users/signin', {
       email: this.state.email,
       password: this.state.password
     }).then(res => {

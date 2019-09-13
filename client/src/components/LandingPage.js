@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import bg from './../assets/unsplash1.jpg';
-import { Button, Nav } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import './styles.css';
 
 export class LandingPage extends Component {
@@ -14,13 +15,17 @@ export class LandingPage extends Component {
           <img src={ bg } className="bg-pic" alt=""/>
         </div>
         <div className="btn-container">
-          <Nav.Link href="/signup">
+          {!this.props.isLoggedIn ?
+          <Link to="/signup">
             <Button
             variant="outline-dark"
             className="signup-btn mt-4"
             size="lg"
             >Sign Up!</Button>
-          </Nav.Link>
+          </Link>
+          :
+          <p>Logged in successfully!</p>
+          }
         </div>
       </Fragment>
     )
