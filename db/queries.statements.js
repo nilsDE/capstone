@@ -1,6 +1,16 @@
 const Statement = require("./models").Statement;
 
 module.exports = {
+  getAllStatements(callback) {
+    console.log('get all statements')
+    return Statement.findAll()
+      .then((statements) => {
+        callback(null, statements);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+  },
   createStatement(newStatement, callback) {
     return Statement.create({
         statement: newStatement.statement,

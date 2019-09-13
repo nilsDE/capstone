@@ -12,19 +12,25 @@ export default class ListStatements extends Component {
       comment: ''
     }
   }
+
+  componentDidMount() {
+    axios.get('/statements').then(res => console.log('axios'))
+  }
+
   render() {
+    const { statement, author, comment } = this.state;
     return (
       this.props.isLoggedIn ?
       <div className="list-card mt-5">
         <Form onSubmit={(e) => this.handleSubmit(e)}>
           <Form.Group controlId="formAphorism">
-            <Form.Control name="statement" type="text" placeholder="Enter a new aphorism..." onChange={e => this.handleChange(e) } />
+            <Form.Control name="statement" type="text" value={statement} placeholder="Enter a new aphorism..." onChange={e => this.handleChange(e) } />
           </Form.Group>
           <Form.Group controlId="formAuthor">
-            <Form.Control name="author" type="text" placeholder="Who said this?" onChange={e => this.handleChange(e)} />
+            <Form.Control name="author" type="text" value={author} placeholder="Who said this?" onChange={e => this.handleChange(e)} />
           </Form.Group>
           <Form.Group controlId="formComment">
-            <Form.Control name="comment" type="text" placeholder="Add a comment..." onChange={e => this.handleChange(e)} />
+            <Form.Control name="comment" type="text" value={comment} placeholder="Add a comment..." onChange={e => this.handleChange(e)} />
           </Form.Group>
           <Button variant="outline-dark" type="submit">
             Submit
@@ -44,6 +50,11 @@ export default class ListStatements extends Component {
       comment: this.state.comment
     }).then(res => {
       if (res.data === 'ok') {
+        this.setState({
+          statement: '',
+          author: '',
+          comment: ''
+        })
         this.props.checkLoggedIn();
       }
     }).catch(res => console.log(res))

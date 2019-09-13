@@ -39,6 +39,7 @@ app.post("/users/signin", userController.signIn);
 app.post("/users/signout", userController.signOut);
 app.post("/statement/create", statementController.create);
 
+app.get("/statements", statementController.index);
 app.get("/users/verify", (req, res) => {
   const loggedIn = req.user ? true : false;
   res.json({ msg: loggedIn });
