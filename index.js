@@ -1,24 +1,23 @@
 const express = require('express');
+require('dotenv').config();
 const passportConfig = require("./config/passport-config");
-const router = express.Router();
 const session = require("express-session");
 const flash = require("express-flash");
-const validation = require("./routes/validation");
-const userController = require("./controllers/userController");
-// Create the server
-const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+const userController = require('./controllers/userController');
 const path = require('path');
-// Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, 'client/build')));
-// Anything that doesn't match the above, send back index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-})
+const helper = require('./auth/helpers');
 
-// routes
-router.post("/users", validation.validateUsers, userController.create);
-router.post("/users/sign_in", validation.validateUsers, userController.signIn);
+const app = express();
 
+app.use(morgan('dev'));
+app.use(cors());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 app.use(session({
   secret: process.env.cookieSecret,
   resave: false,
@@ -33,10 +32,23 @@ app.use((req,res,next) => {
   next();
 })
 
+// routes
+app.post("/users", userController.create);
+app.post("/users/signin", userController.signIn);
+app.post("/users/signout", userController.signOut);
+
+app.get("/users/verify", (req, res) => {
+  const loggedIn = req.user ? true : false;
+  res.json({ msg: loggedIn });
+});
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+})
+
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`)
 })
 
-// Upload new version
-console.log('yes')
