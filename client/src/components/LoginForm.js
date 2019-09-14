@@ -17,7 +17,7 @@ export default class LoginForm extends Component {
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to='/' />
+      return <Redirect to='/list' />
     }
 
     return (

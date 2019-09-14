@@ -7,8 +7,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const userController = require('./controllers/userController');
+const statementController = require('./controllers/statementController');
+const helpers = require('./auth/helpers');
 const path = require('path');
-const helper = require('./auth/helpers');
 
 const app = express();
 
@@ -36,7 +37,11 @@ app.use((req,res,next) => {
 app.post("/users", userController.create);
 app.post("/users/signin", userController.signIn);
 app.post("/users/signout", userController.signOut);
+app.post("/statement/create", statementController.create);
+app.post("/statement/update", statementController.update);
+app.post("/statement/delete", statementController.delete);
 
+app.get("/statements", statementController.index);
 app.get("/users/verify", (req, res) => {
   const loggedIn = req.user ? true : false;
   res.json({ msg: loggedIn });

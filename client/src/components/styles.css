@@ -1,7 +1,11 @@
+/* GENERAL */
+
 *, ::after, ::before {
   margin: 0;
   box-sizing: border-box;
 }
+
+/* Landing Page */
 
 .bg-container {
   width: 90vw;
@@ -52,6 +56,18 @@
   justify-content: center;
 }
 
+@media screen and (max-width: 600px) {
+  .bg-headline-1 {
+    font-size: 1.5rem;
+  }
+
+  .bg-headline-2 {
+    font-size: 2rem;
+  }
+}
+
+/* Sidebar */
+
 .sidebar-title, .sidebar-link {
   padding: .125rem;
   color: white;
@@ -87,12 +103,19 @@
   flex-direction: row;
 }
 
-@media screen and (max-width: 600px) {
-  .bg-headline-1 {
-    font-size: 1.5rem;
-  }
+/* List-Card */
 
-  .bg-headline-2 {
-    font-size: 2rem;
-  }
+.list-card {
+  width: 70vw;
+  box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+  padding: 1rem 2.5rem;
+  background-color: rgb(252, 77, 77, .1);
+}
+
+.form-control, .form-control:focus {
+  border: 0;
+  border-bottom: 1px solid #ced4da;
+  padding: .1rem .75rem;
+  height: 1.8rem;
+  background-color: rgb(252, 77, 77, .1);
 }
