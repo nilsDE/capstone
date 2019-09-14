@@ -38,6 +38,7 @@ app.post("/users", userController.create);
 app.post("/users/signin", userController.signIn);
 app.post("/users/signout", userController.signOut);
 app.post("/statement/create", statementController.create);
+app.post("/statement/update", statementController.update);
 
 app.get("/statements", statementController.index);
 app.get("/users/verify", (req, res) => {

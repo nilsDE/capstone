@@ -24,5 +24,14 @@ module.exports = {
           res.send('ok');
       }
     });
-  }
+  },
+  update(req, res, next) {
+    statementQueries.updateStatement(req, req.body, (err, statement) => {
+      if (err || statement == null) {
+        res.send(err)
+      } else {
+        res.send('changed')
+      }
+    });
+  },
 }

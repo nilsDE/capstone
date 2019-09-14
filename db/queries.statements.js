@@ -24,5 +24,23 @@ module.exports = {
       .catch((err) => {
         callback(err);
       })
+  },
+  updateStatement(req, updatedStatement, callback) {
+    console.log(req.params.id)
+    return Statement.findByPk(updatedStatement.id)
+      .then((statement) => {
+        if (!statement) {
+          return callback("Statement not found");
+        }
+        statement.update(updatedStatement, {
+            fields: Object.keys(updatedStatement)
+          })
+          .then(() => {
+            callback(null, statement);
+          })
+          .catch((err) => {
+            callback(err);
+          });
+      });
   }
 }
