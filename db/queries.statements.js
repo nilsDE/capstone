@@ -42,5 +42,17 @@ module.exports = {
             callback(err);
           });
       });
-  }
+  },
+  deleteStatement(req, statementToDelete, callback) {
+    return Statement.findByPk(statementToDelete.id)
+      .then((statement) => {
+          statement.destroy()
+            .then((res) => {
+              callback(null, statement);
+            });
+      })
+      .catch((err) => {
+        callback(err);
+      });
+  },
 }

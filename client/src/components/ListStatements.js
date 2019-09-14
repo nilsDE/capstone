@@ -23,7 +23,8 @@ export default class ListStatements extends Component {
   }
 
   render() {
-    const { statement, author, comment } = this.state;
+    const { statement, author, comment } = this.state;    
+
     return (
       this.props.isLoggedIn ?
       <Fragment>
@@ -57,15 +58,31 @@ export default class ListStatements extends Component {
               <Form.Control name="comment" type="text" value={s.comment} placeholder="Add a comment..." onChange={e => this.handleChangeData(e)} />
             </Form.Group>
             <Button variant="outline-dark" type="submit">
-              Submit
+              Update
+            </Button>
+            <Button className="ml-2" variant="outline-dark" onClick={(e) => this.deleteStatement(e, id)}>
+              Delete
             </Button>
           </Form>
         </div>
         )}
       </Fragment>
       :
-      <h1>You are not logged in!!!</h1>
+      <h2 className="mt-5">You are logged out</h2>
     )
+  }
+
+  deleteStatement(e, key) {
+    e.preventDefault();
+    let statement = this.state.data[key];
+    axios.post('/statement/delete', {
+      id: statement.id
+    }).then(res => {
+      if (res.data === 'deleted') {
+        this.getAllStatements();
+        this.props.checkLoggedIn();
+      }
+    }).catch(res => console.log(res))
   }
 
   handleSubmit(e) {
@@ -75,7 +92,7 @@ export default class ListStatements extends Component {
       author: this.state.author,
       comment: this.state.comment
     }).then(res => {
-      if (res.data === 'ok') {
+      if (res.data === 'created') {
         this.setState({
           statement: '',
           author: '',
@@ -96,7 +113,7 @@ export default class ListStatements extends Component {
       comment: statement.comment,
       id: statement.id
     }).then(res => {
-      if (res.data === 'ok') {
+      if (res.data === 'changed') {
         console.log('okay')
         this.props.checkLoggedIn();
       }

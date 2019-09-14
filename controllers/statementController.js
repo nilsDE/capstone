@@ -21,7 +21,7 @@ module.exports = {
       if (err) {
         res.send(err)
       } else {
-          res.send('ok');
+          res.send('created');
       }
     });
   },
@@ -34,4 +34,13 @@ module.exports = {
       }
     });
   },
+  delete(req, res, next) {
+    statementQueries.deleteStatement(req, req.body, (err, statement) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('deleted');
+      }
+    });
+  }
 }

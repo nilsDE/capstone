@@ -109,5 +109,13 @@
   width: 70vw;
   box-shadow: 0 0 20px rgba(0, 0, 0, .2);
   padding: 1rem 2.5rem;
+  background-color: rgb(252, 77, 77, .1);
 }
 
+.form-control, .form-control:focus {
+  border: 0;
+  border-bottom: 1px solid #ced4da;
+  padding: .1rem .75rem;
+  height: 1.8rem;
+  background-color: rgb(252, 77, 77, .1);
+}
