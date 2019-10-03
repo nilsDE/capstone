@@ -17,7 +17,10 @@ export class SiteNavbar extends Component {
                   <Link to="/signup" className="sidebar-link">SignUp</Link>
                   </Fragment>
               :
-              <Button onClick={() => this.logOut()} className="sidebar-btn sidebar-link">SignOut</Button>
+              <Fragment>
+                <Link to="/list" className="sidebar-link">My List</Link>
+                <Button onClick={() => this.logOut()} className="sidebar-btn sidebar-link">SignOut</Button>
+              </Fragment>
               }
             </Nav>
         </Navbar>

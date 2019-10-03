@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import ListElement from './ListElement';
+
 import './styles.css';
 
 export default class ListStatements extends Component {
@@ -44,27 +46,15 @@ export default class ListStatements extends Component {
             </Button>
           </Form>
         </div>
-
         {this.state.data.map((s, id) => 
-        <div key={id} className="list-card mt-5">
-          <Form key={id} onSubmit={(e) => this.handleSubmitUpdate(e, id)}>
-            <Form.Group controlId={id}>
-              <Form.Control name="statement" type="text" value={s.statement} placeholder="Enter an aphorism..." onChange={e => this.handleChangeData(e) } />
-            </Form.Group>
-            <Form.Group controlId={id}>
-              <Form.Control name="author" type="text" value={s.author} placeholder="Who said this?" onChange={e => this.handleChangeData(e)} />
-            </Form.Group>
-            <Form.Group controlId={id}>
-              <Form.Control name="comment" type="text" value={s.comment} placeholder="Add a comment..." onChange={e => this.handleChangeData(e)} />
-            </Form.Group>
-            <Button variant="outline-dark" type="submit">
-              Update
-            </Button>
-            <Button className="ml-2" variant="outline-dark" onClick={(e) => this.deleteStatement(e, id)}>
-              Delete
-            </Button>
-          </Form>
-        </div>
+          <ListElement 
+            key={id}
+            data={s} 
+            id={id}
+            handleChangeData={e => this.handleChangeData(e)} 
+            deleteStatement={(e, key) => this.deleteStatement(e, key)}
+            handleSubmitUpdate={(e, key) => this.handleSubmitUpdate(e, key)}
+          />
         )}
       </Fragment>
       :
