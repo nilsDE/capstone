@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+.App {
+  white-space: normal;
+}
+
 /* Landing Page */
 
 .bg-container {

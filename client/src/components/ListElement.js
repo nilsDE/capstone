@@ -18,7 +18,7 @@ export default class ListElement extends Component {
     return (
       active ?
       <Fragment>
-        <div key={id} className="list-card mt-5">
+        <div key={id} className="list-card mt-4">
           <Form 
             key={id} 
             onSubmit={(e) => {
@@ -30,7 +30,6 @@ export default class ListElement extends Component {
                 name="statement" 
                 type="text" 
                 value={data.statement} 
-                className="inactive-statement"
                 placeholder="Enter an aphorism..." 
                 onChange={e => this.props.handleChangeData(e) } 
               />
@@ -60,12 +59,12 @@ export default class ListElement extends Component {
               <Button className="ml-2" variant="outline-dark" onClick={(e) => this.props.deleteStatement(e, id)}>
                 Delete
               </Button>
-            }
+              <Button className="ml-2" variant="outline-dark" onClick={() => this.toggleActive()}>Cancel</Button>
           </Form>
         </div>
       </Fragment>
       :
-      <div key={id} className="list-card mt-5">
+      <div key={id} className="list-card mt-4">
         <p className="inactive-statement">{`"${data.statement}"`}</p>
         <p className="inactive-author">{`- ${data.author}`}</p>
         <p className="inactive-comment">{data.comment}</p>
