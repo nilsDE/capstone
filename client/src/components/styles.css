@@ -126,7 +126,8 @@
 }
 
 .inactive-statement {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
 }
 
 .inactive-author {
@@ -134,10 +135,6 @@
 }
 
 .inactive-comment {
-  font-size: .9rem;
+  font-size: .8rem;
   color: rgb(0, 0, 0, .7);
-}
-
-.inactive-group {
-  margin-bottom: 4px;
 }

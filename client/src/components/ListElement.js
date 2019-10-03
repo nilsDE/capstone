@@ -16,6 +16,7 @@ export default class ListElement extends Component {
     let active = this.state.active;
 
     return (
+      active ?
       <Fragment>
         <div key={id} className="list-card mt-5">
           <Form 
@@ -24,26 +25,23 @@ export default class ListElement extends Component {
               this.props.handleSubmitUpdate(e, id)
               this.toggleActive()
           }}>
-            <Form.Group controlId={id} className={!active ? "inactive-group" : null}>
+            <Form.Group controlId={id}>
               <Form.Control 
                 name="statement" 
                 type="text" 
-                value={active ? data.statement : `"${data.statement}"` } 
-                className={!active ? "inactive-statement" : null}
+                value={data.statement} 
+                className="inactive-statement"
                 placeholder="Enter an aphorism..." 
                 onChange={e => this.props.handleChangeData(e) } 
-                disabled={!active ? true : false}
               />
             </Form.Group>
             <Form.Group controlId={id}>
               <Form.Control 
                 name="author" 
                 type="text" 
-                value={active ? data.author : `- ${data.author}`}
-                className={!active ? "inactive-author" : null} 
+                value={data.author}
                 placeholder="Who said this?" 
                 onChange={e => this.props.handleChangeData(e)} 
-                disabled={!active ? true : false}
               />
             </Form.Group>
             <Form.Group controlId={id}>
@@ -52,29 +50,27 @@ export default class ListElement extends Component {
                 rows="2"
                 type="text" 
                 value={data.comment} 
-                className={!active ? "inactive-comment" : null} 
                 placeholder="Add a comment..." 
                 onChange={e => this.props.handleChangeData(e)} 
-                disabled={!active ? true : false}
               />
             </Form.Group>
-           
-            {!active ?
-              <Button variant="outline-dark" onClick={() => this.toggleActive()}>Edit</Button>
-            :
-              <Fragment>
-                <Button variant="outline-dark" type="submit">
-                  Update
-                </Button>
-                <Button className="ml-2" variant="outline-dark" onClick={(e) => this.props.deleteStatement(e, id)}>
-                  Delete
-                </Button>
-              </Fragment>  
+              <Button variant="outline-dark" type="submit">
+                Update
+              </Button>
+              <Button className="ml-2" variant="outline-dark" onClick={(e) => this.props.deleteStatement(e, id)}>
+                Delete
+              </Button>
             }
-            
           </Form>
         </div>
       </Fragment>
+      :
+      <div key={id} className="list-card mt-5">
+        <p className="inactive-statement">{`"${data.statement}"`}</p>
+        <p className="inactive-author">{`- ${data.author}`}</p>
+        <p className="inactive-comment">{data.comment}</p>
+        <Button variant="outline-dark" onClick={() => this.toggleActive()}>Edit</Button>
+      </div>
     )
   }
 
